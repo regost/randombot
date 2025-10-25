@@ -60,6 +60,6 @@ public class Choose : ApplicationCommandModule
     {
         var random = new Random();
         var choice = Program.Choices[random.Next(Program.Choices.Count)];
-        await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent($"Random choice: {choice}"));
+        await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent($"variant: {choice}"));
     }
 }

@@ -82,6 +82,6 @@ public class Choose : ApplicationCommandModule
 
         await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource,
             new DiscordInteractionResponseBuilder().WithContent(content));
-}
+
     }
 }

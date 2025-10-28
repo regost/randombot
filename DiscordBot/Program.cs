@@ -62,4 +62,26 @@ public class Choose : ApplicationCommandModule
         var choice = Program.Choices[random.Next(Program.Choices.Count)];
         await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent($"variant: {choice}"));
     }
+    [SlashCommand("rand group", "chooses a group of 5 variants to pick/ban from")]
+    public async Task RandomChoice2(InteractionContext ctx)
+    {
+        var random = new Random();
+        var choices[] = [] 
+        for (i = 1; i<=5; i++)
+        {
+            var randNumber = random.Next(Program.Choices.Count)
+            var choice = Program.Choices[randNumber]
+            if (!choices.contains(choice))
+            {
+                choices.append();
+            }else
+            {
+                i--
+            }
+        }
+        for choice in choices
+        {
+            await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent($"variant: {choice}"));
+        }
+    }
 }

@@ -62,26 +62,26 @@ public class Choose : ApplicationCommandModule
         var choice = Program.Choices[random.Next(Program.Choices.Count)];
         await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent($"variant: {choice}"));
     }
-    [SlashCommand("rand group", "chooses a group of 5 variants to pick/ban from")]
-    public async Task RandomChoice2(InteractionContext ctx)
+    [SlashCommand("randgroup", "Chooses a group of up to 5 unique variants to pick/ban from")]
+    public async Task RandomChoiceGroup(InteractionContext ctx)
     {
         var random = new Random();
-        var choices[] = [] 
-        for (i = 1; i<=5; i++)
+        var choices = new List<string>();
+        var available = new List<string>(Program.Choices);
+
+        while (choices.Count < 5 && available.Count > 0)
         {
-            var randNumber = random.Next(Program.Choices.Count)
-            var choice = Program.Choices[randNumber]
-            if (!choices.contains(choice))
-            {
-                choices.append();
-            }else
-            {
-                i--
-            }
+            int idx = random.Next(available.Count);
+            choices.Add(available[idx]);
+            available.RemoveAt(idx);
         }
-        for choice in choices
-        {
-            await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent($"variant: {choice}"));
-        }
+
+        var content = choices.Count > 0
+            ? $"variants: {string.Join(", ", choices)}"
+            : "No variants available.";
+
+        await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource,
+            new DiscordInteractionResponseBuilder().WithContent(content));
+}
     }
 }
